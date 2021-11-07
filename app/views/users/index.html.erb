@@ -2,32 +2,67 @@
 
 <h1>Users</h1>
 
-<table role='userdatatable' id="users-datatable" data-source="<%= users_path(format: :json) %>">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Phone</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
+<!--<table>-->
+  <!--<thead>-->
+    <!--<tr>-->
+      <!--<th>Title</th>-->
+      <!--<th>Description</th>-->
+      <!--<th>Comments</th>-->
+      <!--<th>Tag</th>-->
+      <!--<th colspan="3"></th>-->
+    <!--</tr>-->
+  <!--</thead>-->
 
+  <!--<tbody>-->
+    <!--<%# @blogs.each do |blog| %>-->
+      <!--<tr>-->
+        <!--<td><%#= blog.title %></td>-->
+        <!--<td><%#= blog.description %></td>-->
+        <!--<td><%#= blog.comments %></td>-->
+        <!--<td><%#= blog.tag %></td>-->
+        <!--<td><%#= link_to 'Show', blog %></td>-->
+        <!--<td><%#= link_to 'Edit', edit_blog_path(blog) %></td>-->
+        <!--<td><%#= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      <!--</tr>-->
+    <!--<%# end %>-->
+  <!--</tbody>-->
+<!--</table>-->
+
+<table id="users-datatable" data-source="<%= users_path(format: :json) %>">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Phone</th>
+    
+    
+  </tr>
+  </thead>
   <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.id %></td>
-        <td><%= user.name %></td>
-        <td><%= user.phone %></td>
-        <td>
-        <%= link_to 'Show', user %>
-        <%= link_to 'Edit', edit_user_path(user) %>
-        <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
   </tbody>
 </table>
 
 <br>
 
 <%= link_to 'New User', new_user_path %>
+
+<script>
+    jQuery(document).ready(function() {
+        $('#users-datatable').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "columnDefs": [{ "orderable": false, "targets": -1 }],
+            "ajax": $('#users-datatable').data('source'),
+            "pagingType": "full_numbers",
+            "columns": [
+                {"data": "id"},
+                {"data": "name"},
+                {"data": "phone"}
+                
+            ]
+            // pagingType is optional, if you want full pagination controls.
+            // Check dataTables documentation to learn more about
+            // available options.
+        });
+    });
+</script>
