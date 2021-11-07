@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user.build_place
   end
 
   # GET /users/1/edit
@@ -67,6 +68,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :phone)
+      params.require(:user).permit(:name, :phone,:place_attributes => [:location])
     end
 end
