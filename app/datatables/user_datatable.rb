@@ -4,7 +4,8 @@ class UserDatatable < AjaxDatatablesRails::ActiveRecord
   @view_columns ||= {
     id:          { source: "User.id" },
     name:       { source: "User.name" },
-    phone:      { source: "User.phone" }
+    phone:      { source: "User.phone" },
+    location: {source: "Place.location"}
   }
 end
 
@@ -14,13 +15,14 @@ def data
         id:          record.id,
         name:       record.name,
         phone:      record.phone,
-        DT_RowId:    record.id,
+        location: record.place.location
+       
     }
   end
 end
 
 def get_raw_records
-  User.all
+  User.includes(:place)
 end
 
 end
