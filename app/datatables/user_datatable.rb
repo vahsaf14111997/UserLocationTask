@@ -5,7 +5,7 @@ class UserDatatable < AjaxDatatablesRails::ActiveRecord
     id:          { source: "User.id" },
     name:       { source: "User.name" },
     phone:      { source: "User.phone" },
-    location: {source: "Place.location"}
+    location: {source: "Place.location", searchable: false}
   }
 end
 
